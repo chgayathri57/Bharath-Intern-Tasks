@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">    
+  </head>
+  <body>
+    <header>
+      <h1>Temperature Converter</h1>
+    </header>
+    <div id="main-content">
+      <form>
+        <label for="celsius-input">Celsius:</label>
+        <input type="number" id="celsius-input" placeholder="Enter Temperature in Celsius">
+        
+        <label for="fahrenheit-input">Fahrenheit:</label>
+        <input type="number" id="fahrenheit-input" placeholder="Enter Temperature in Fahrenheit">
+        
+        <button type="button" id="convert-btn">Convert</button>
+        
+        <div id="result"></div>
+      </form>
+    </div>
+    <script>
+      const celsiusInput = document.getElementById("celsius-input");
+      const fahrenheitInput = document.getElementById("fahrenheit-input");
+      const convertBtn = document.getElementById("convert-btn");
+      const resultDiv = document.getElementById("result");
+      
+      function convertCelsiusToFahrenheit(celsius) {
+        return (celsius * 9/5) + 32;
+      }
+      
+      function convertFahrenheitToCelsius(fahrenheit) {
+        return (fahrenheit - 32) * 5/9;
+      }
+      
+      convertBtn.addEventListener("click", () => {
+        if (celsiusInput.value) {
+          const celsius = parseFloat(celsiusInput.value);
+          const fahrenheit = convertCelsiusToFahrenheit(celsius);
+          resultDiv.textContent = `${celsius} degrees Celsius is equal to ${fahrenheit.toFixed(1)} degrees Fahrenheit.`;
+          fahrenheitInput.value = fahrenheit.toFixed(1);
+        } else if (fahrenheitInput.value) {
+          const fahrenheit = parseFloat(fahrenheitInput.value);
+          const celsius = convertFahrenheitToCelsius(fahrenheit);
+          resultDiv.textContent = `${fahrenheit} degrees Fahrenheit is equal to ${celsius.toFixed(1)} degrees Celsius.`;
+          celsiusInput.value = celsius.toFixed(1);
+        } else {
+            resultDiv.textContent = "Please enter a temperature to convert.";
+        }
+        });
+    </script>
+</body>
+</html>
